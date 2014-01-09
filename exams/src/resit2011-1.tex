@@ -1,0 +1,74 @@
+\documentclass[a4paper, addpoints, answers]{exam}
+\usepackage{graphicx}
+
+\usepackage{array}
+
+\usepackage{fancyvrb}
+
+\usepackage{color}
+\shadedsolutions
+\definecolor{SolutionColor}{gray}{0.95}
+
+\usepackage{tikz}
+\newenvironment{Tree}
+{\begin{tikzpicture}[scale =.5]\codesize\tikzset{every node/.style={font=\tt}}}
+{\end{tikzpicture}}
+
+\newcommand{\ifsolutionnewpage}
+{\ifprintanswers \newpage \fi}
+
+\title{IN4303 --- Compiler Construction}
+\author{Exam}
+\date{April 04, 2011}
+
+\pagestyle{headandfoot}
+
+\header
+{IN4303}
+{Compiler Construction}
+{Apr 04, 2011}
+
+\footer
+{}
+{Page \thepage\ of \numpages}
+{}
+
+\headrule
+\footrule
+
+\begin{document}
+
+\input{cover}
+
+\pointsinrightmargin
+\totalformat{(\totalpoints\ \points)}
+\qformat{\textbf{Question \thequestion:} \thequestiontitle\hfill}
+
+\begin{questions}
+
+\input{questions/language/sapir-chomsky}
+\input{questions/cfgs/calls}
+\input{questions/cfgs/trees}
+\input{questions/stratego/inverse}
+\input{questions/analysis/approach}
+
+\ifsolutionnewpage
+
+\input{questions/jvm/call}
+
+\ifsolutionnewpage
+
+\input{questions/analysis/polymorphism}
+\input{questions/frames/fastcall}
+\input{questions/register-allocation/liveness-appel-11-3-1}
+
+\newpage             
+
+\input{questions/register-allocation/colouring-appel-11-3-1}
+\input{questions/garbage/counting}
+\input{questions/lexical/binaries}
+\input{questions/cfgs/add-ll}
+
+\end{questions}
+
+\end{document}

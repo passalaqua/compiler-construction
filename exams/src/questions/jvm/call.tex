@@ -1,0 +1,130 @@
+\titledquestion{Java Virtual Machine}[10]
+\droptotalpoints
+
+Execute the bytecode instructions of \Verb+A/main()V+, starting with an empty stack:
+\begin{center}
+\begin{minipage}[t]{5cm} 
+\fvset{frame=lines}
+\fvset{framesep=8pt}
+\fvset{label=\texttt{A/main()V}}
+\begin{Verbatim}
+    aload_0
+    bipush 5
+    iconst_4
+    isub
+    invokevirtual A/m(I)V
+\end{Verbatim}
+\end{minipage}\hspace{1cm}
+\begin{minipage}[t]{4cm}
+\fvset{frame=lines}
+\fvset{framesep=8pt}
+\fvset{label=\texttt{A/m(I)V}}
+\begin{Verbatim}
+    goto l2
+l1: iinc 1 -1
+l2: iload_1
+    ifne l1
+    return
+\end{Verbatim}
+\end{minipage}\hspace{1cm}
+\begin{minipage}[t]{4cm}
+\fvset{frame=lines}
+\fvset{framesep=8pt}
+\fvset{label=\textrm{Hint: }\texttt{iinc 1 -1}}
+\begin{Verbatim}
+    iload_1 
+    ldc -1 
+    iadd 
+    istore_1
+    
+\end{Verbatim}
+\end{minipage}
+ \end{center}
+
+The initial value of local variable 0 is \Verb+4242 4103+, pointing to an object of class \Verb+A+.
+Show stacks and local variables after each instruction. 
+
+\begin{solution}
+\begin{tabular}[t]{lcc} 
+% &\begin{tabular}{|rr|}
+% \hline
+% stack & locals \\
+% & \Verb+&A+  
+% \end{tabular}\\\\
+\Verb+aload_0+&\begin{tabular}{|rr|}
+\hline
+stack & locals \\
+\Verb+&A+ & \Verb+&A+ 
+\end{tabular}\\\\
+\Verb+bipush 5+&\begin{tabular}{|rr|}
+\hline
+stack & locals \\
+\Verb+&A+ & \Verb+&A+ \\
+\Verb+5+ & 
+\end{tabular}\\\\
+\Verb+iconst_4+&\begin{tabular}{|rr|}
+\hline
+stack & locals \\
+\Verb+&A+ & \Verb+&A+ \\
+\Verb+5+ & \\
+\Verb+4+ &
+\end{tabular}\\\\
+\Verb+isub+&\begin{tabular}{|rr|}
+\hline
+stack & locals \\
+\Verb+&A+ & \Verb+&A+ \\
+\Verb+1+ & 
+\end{tabular}\\\\
+\Verb+invokevirtual A/m(I)V+&\begin{tabular}{|rr|}
+\hline
+stack & locals \\
+& \Verb+&A+ \\
+&
+\end{tabular} 
+&\begin{tabular}{|rr|}
+\hline
+stack & locals \\
+& \Verb+&A+  \\
+& \Verb+1+
+\end{tabular}\\\\
+\begin{BVerbatim} 
+goto l2
+iload_1
+\end{BVerbatim}
+&\vdots&\begin{tabular}{|rr|}
+\hline
+stack & locals \\
+\Verb+1+ & \Verb+&A+  \\
+& \Verb+1+
+\end{tabular}\\\\
+\Verb+ifne l1+&\vdots&\begin{tabular}{|rr|}
+\hline
+stack & locals \\
+& \Verb+&A+  \\
+& \Verb+1+
+\end{tabular}\\\\
+\Verb+iinc 1 -1+&\vdots&\begin{tabular}{|rr|}
+\hline
+stack & locals \\
+& \Verb+&A+  \\
+& \Verb+0+
+\end{tabular}\\\\ 
+\Verb+iload_1+&\vdots&\begin{tabular}{|rr|}
+\hline
+stack & locals \\
+\Verb+0+ & \Verb+&A+  \\
+& \Verb+0+
+\end{tabular}\\\\ 
+\Verb+ifne l1+&\vdots&\begin{tabular}{|rr|}
+\hline
+stack & locals \\
+& \Verb+&A+  \\
+& \Verb+0+
+\end{tabular}\\\\
+\Verb+return+&\begin{tabular}{|rr|}
+\hline
+stack & locals \\
+& \Verb+&A+
+\end{tabular} 
+\end{tabular}
+\end{solution}

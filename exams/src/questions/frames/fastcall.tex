@@ -1,0 +1,69 @@
+\titledquestion{Calling conventions}
+\droptotalpoints
+
+A compiler translates a function call and a function body to the following instructions for a register-based machine:
+
+\begin{center}
+\begin{minipage}[t]{5cm} 
+\fvset{frame=lines}
+\fvset{framesep=8pt}
+\fvset{label=\textrm{function call}}
+\begin{Verbatim}
+    mov  AX 21
+    mov  DX 42
+    call _f@8
+\end{Verbatim}
+\end{minipage}
+\hspace{1cm}
+\begin{minipage}[t]{5cm}
+\fvset{frame=lines}
+\fvset{framesep=8pt}
+\fvset{label=\textrm{function body}}
+\begin{Verbatim}
+    push BP
+    mov  BP SP
+    add  AX DX
+    pop  BP
+    ret
+\end{Verbatim}
+\end{minipage}
+ \end{center}
+
+\begin{parts}
+\part[1]
+Which calling convention do these instructions follow? 
+
+\begin{solution}
+FASTCALL
+\end{solution}
+
+\part[1]
+What are the benefits of this calling convention?
+
+\begin{solution}
+Passing parameters in registers avoids memory access and reduces stack frame
+sizes.
+\end{solution}
+
+\part[8]
+How are calls handled by callers and by callees according to this convention?
+Base your explanation on the given instructions.
+
+\begin{solution}
+The caller passes the first parameters in registers (\Verb+mov  AX 21+,
+\Verb+mov DX 42+) and
+pushs remaining parameters right-to-left on the stack (not in this
+  example).
+The callee saves the old base pointer on the stack (\Verb+push BP+) and
+initialises the new one (\Verb+mov  BP SP+).
+Next, it saves registers which it needs to preserve (not in this example).
+Finally, it leaves the result in \Verb+AX+ (\Verb+add AX DX+),
+restores the registers (not in this example) 
+and the base pointer (\Verb+pop BP+),
+and cleans the stack (not in this example),
+before it returns (\Verb+ret+).
+
+\end{solution}
+
+\end{parts}
+

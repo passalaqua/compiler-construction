@@ -1,0 +1,23 @@
+\titledquestion{Garbage collection}
+\droptotalpoints
+
+\begin{parts}
+\part[3]
+Explain the general ideas behind garbage collection by reference counting.
+
+\begin{solution}
+For each element on the heap, a counter is maintained.
+At each assignment, the counter of the olde reference is decreased
+and the counter of the new reference increased.
+Heap elements with a reference count of 0 can be collected when memory for
+a new element needs to be allocated.
+\end{solution}
+
+\part[2]
+What are the disadvantages of this strategy?
+
+\begin{solution}
+Heap elements with cyclic references are not collected.
+Furthermore, the additional instructions for counting slow down the execution.
+\end{solution}
+\end{parts}

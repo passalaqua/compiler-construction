@@ -1,0 +1,93 @@
+\titledquestion{Polymorphism}
+\droptotalpoints
+\begin{parts}
+\part[6] 
+Identify three examples of polymorphism in the following Java expression:
+\begin{verbatim}
+"1" + ((2 + 4) + 3.5) 
+\end{verbatim}
+Which kinds of polymorphism do they represent?
+Explain the differences.
+
+\begin{solution}
+The \verb-+- operator is overloaded (ad-hoc polymorphism):
+  It either performs a string concatenation (1st occurence), 
+  an integer addition (2nd occurence),
+  or a floating point addition (3rd occurrence).
+These are two different kinds of overloading.
+The first and second occurence perform different operations on different types,
+while the second and third occurrence perform similar operations on different
+types.
+
+The result of \verb=(2 + 4)= is converted (implicit coercion, ad-hoc
+polymorphism) from an integer value into a floating point value.
+  Similarly, the result of \verb=((2 + 4) + 3.5)= is converted into a string value.
+
+With operator overloading, the types of the operands determine which operation
+is performed.
+With type coercion, there is no operation that can handle the operand types,
+i.e. there is no operation that can handle an integer and a floating point
+operand or a string and a floating point operand. 
+Instead, the operand is converted to a type an
+operation can handle.
+\end{solution}
+
+\part[4]
+Explain the difference between method overloading and method overriding.
+Illustrate your explanation with an example in Java.
+
+\begin{solution}
+Method overloading and overriding is about different methods with the same name.
+%
+Method overloading can take place in unrelated classes, in the same class, and
+in classes related by inheritance.
+In unrelated classes, there are no constraints on the parameter or return types
+of the overloaded methods (e.g. \Verb+A.m()+ and \Verb+B.m()+ or \Verb+A.m()+
+and \Verb+B.m(A)+).
+In the same class, the parameter types of
+methods with the same name need to be different (e.g. \Verb+B.m()+ and
+\Verb+B.m(A)+).
+The same holds for classes related by inheritance (e.g. \Verb+B.m()+ and
+\Verb+C.m(A)+).
+
+In contrast, method overriding can only take place in classes related by
+inheritance.
+The method in the subclass needs to have the same and the same parameter types
+(at least in Java) and a covariant return type (subtype of the overridden
+method's return type).
+In the example, \verb+C.m(A)+ overrides \verb+B.m(A)+ (same parameter types,
+covariant return type) but overloads \verb+B.m()+ (different parameter types).
+
+\fvset{frame=lines}
+\fvset{framesep=8pt}
+\begin{minipage}[t]{.3\textwidth}
+\begin{Verbatim}
+class A {
+  public int m() {...}
+}
+
+\end{Verbatim}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{.3\textwidth}
+\begin{Verbatim}
+class B {
+  public int m() {...}
+  public B m(A a) {...}
+}
+\end{Verbatim}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{.3\textwidth}
+\begin{Verbatim}
+class C extends B {
+  public C m(A a) {...}
+}
+
+\end{Verbatim}
+\end{minipage}
+
+
+\end{solution}
+
+\end{parts}

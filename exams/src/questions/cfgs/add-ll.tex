@@ -1,0 +1,69 @@
+\titledquestion{LL parsing}
+\droptotalpoints
+
+Let $G_3$ be a formal grammar with nonterminal symbols $S$, $T$, $E$ and $E^\prime$,
+terminal symbols '$\mathbf{x}$', '$\mathbf{+}$' and '$\mathbf{\$}$', start symbol $S$,
+and the following production rules:
+\begin{eqnarray*}
+S & \rightarrow & E \mathbf{\ \$}\\
+E & \rightarrow & T \  E^\prime \\
+E^\prime & \rightarrow & \mathbf{+\ } \ T \  E^\prime \\
+E^\prime & \rightarrow &  \\
+T & \rightarrow & \mathbf{x} 
+\end{eqnarray*}
+
+\begin{parts}
+\part[8]
+Construct an LL(0) parse table for the grammar. 
+Calculate FIRST and FOLLOW sets as needed.
+
+\begin{solution}
+\begin{tabular}[t]{l|lll}
+     & nullable & FIRST & FOLLOW \\
+\hline
+$S$ & no & $\mathbf{x}$ & \\
+$E$ & no & $\mathbf{x}$ & $\mathbf{\$}$ \\
+$E^\prime$ & yes & $\mathbf{+}$ & $\mathbf{\$}$ \\
+$T$ & no & $\mathbf{x}$ & $\mathbf{+}\,\mathbf{\$}$
+\end{tabular}
+\begin{tabular}[t]{l|ccc}
+     & $\mathbf{x}$ & $\mathbf{+}$ & $\mathbf{\$}$ \\
+\hline
+$S$ & $S \rightarrow E \mathbf{\ \$}$\\
+$E$ & $E \rightarrow T \  E^\prime$\\
+$E^\prime$ & & $E^\prime \rightarrow \mathbf{+\ } \ T \  E^\prime$ & $E^\prime
+\rightarrow$\\
+$T$ & $T \rightarrow \mathbf{x}$
+\end{tabular}
+\end{solution}
+
+\part[2]
+Use the parse table to recognise the sentence $\mathbf{x+x}$.
+Show the stack and the remaining input after each step.
+
+\begin{solution}
+\begin{tabular}[t]{r|r}
+stack & input \\
+\hline
+$S$   & $\mathbf{x+x\$}$ \\
+$E\$$ & $\mathbf{x+x\$}$ \\
+$TE^\prime\$$ & $\mathbf{x+x\$}$ \\
+$\mathbf{x}E^\prime\$$ & $\mathbf{x+x\$}$ \\
+% \end{tabular}
+% \begin{tabular}[t]{r|r}
+% stack & input \\
+% \hline
+$E^\prime\$$ & $\mathbf{+x\$}$ \\
+$\mathbf{+} T E^\prime\$$ & $\mathbf{+x\$}$ \\
+$T E^\prime\$$ & $\mathbf{x\$}$ \\
+$\mathbf{x} E^\prime\$$ & $\mathbf{x\$}$ \\
+% \end{tabular}
+% \begin{tabular}[t]{r|r}
+% stack & input \\
+% \hline
+$E^\prime\$$ & $\mathbf{\$}$ \\
+$\mathbf{\$}$ & $\mathbf{\$}$
+\end{tabular}
+\end{solution}
+
+\end{parts}

@@ -1,0 +1,63 @@
+\titledquestion{Formal grammars}
+\droptotalpoints
+
+Let $G_1$ be a formal grammar with nonterminal symbols $S$, and $P$,
+terminal symbols '$\mathbf{f}$', '$\mathbf{x}$', '$\mathbf{,}$', '$\mathbf{(}$' and '$\mathbf{)}$', 
+start symbol $S$, and the following production rules:
+\begin{eqnarray*}
+S & \rightarrow & \mathbf{f\ (\ } P \mathbf{\ )}\\
+P & \rightarrow & \mathbf{x} \\
+P & \rightarrow & P \mathbf{\ ,\ x} \\
+P & \rightarrow & \mathbf{x\ ,\ } P 
+\end{eqnarray*}
+
+\begin{parts}
+
+\part[1]
+Is $G_1$ context-free? Why (not)?
+
+\begin{solution}
+Yes, because all production rules are of the form $N \times \left( N \cup \Sigma \right)^*$. 
+\end{solution}
+
+\part[2]
+Describe the language defined by $G_1$ in English.
+
+\begin{solution}
+The language consists of all applications of a function symbol $\mathbf{f}$ to one or more parameters $\mathbf{x}$. 
+Parameters are separated by commas and surrounded by parentheses.
+\end{solution}
+
+%\part[2]
+%Use $G_1$ to generate a sentence with at least five words. 
+%Show each generation step.
+\part[3]
+Give a left-most derivation for the sentence $\mathbf{f ( x , x , x )}$
+according to $G_1$.
+
+\begin{solution}
+$S \Rightarrow 
+\mathbf{f\ (\ } P \mathbf{\ )} \Rightarrow 
+\mathbf{f\ (\ } P \mathbf{\ ,\ x\ )} \Rightarrow 
+\mathbf{f\ (\ } P \mathbf{\ ,\ x\ ,\ x\ )}\Rightarrow 
+\mathbf{f\ (\ x\ ,\ x\ ,\ x\ )}$
+\end{solution}
+
+\part[4]
+Use $\mathbf{f ( x , x )}$ as an example to explain why $G_1$ is ambigous.
+
+\begin{solution}
+There are two different left-most derivations for the same word.
+
+$S \Rightarrow 
+\mathbf{f\ (\ } P \mathbf{\ )} \Rightarrow 
+\mathbf{f\ (\ } P \mathbf{\ ,\ x\ )} \Rightarrow 
+\mathbf{f\ (\ x\ ,\ x\ )}$
+and 
+$S \Rightarrow 
+\mathbf{f\ (\ } P \mathbf{\ )} \Rightarrow 
+\mathbf{f\ (\ } \mathbf{x\ ,\ } P \mathbf{\ )} \Rightarrow 
+\mathbf{f\ (\ x\ ,\ x\ )}$
+\end{solution}
+
+\end{parts}

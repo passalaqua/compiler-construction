@@ -1,0 +1,58 @@
+\titledquestion{Syntax trees}
+\droptotalpoints
+
+\begin{parts}
+
+\part[2]
+Why do we need syntax trees when constructing compilers?
+
+\begin{solution}
+Semantic analysis and code generation require knowledge about the structure of a sentence.
+Syntax trees capture this structure.
+\end{solution}
+
+\part[3]
+What are the fundamental differences between parse trees and abstract syntax trees? 
+
+\begin{solution}
+In parse trees, inner nodes are labeled with nonterminal symbols.
+Leave nodes are labeled with terminal symbols, which form the derived sentence.
+Abstract syntax trees abstract over injective production rules and over
+those terminal symbols which do not convey information.
+Instead, they convey information in constructor labels at nodes.
+\end{solution}
+
+\part[5]
+How can we represent trees as terms? Illustrate your explanation with an example.
+
+\begin{solution}
+The leaves of trees are represented as constants.
+Nodes with subtrees are represented as terms with subterms.
+Labels of these nodes become the constructor of these terms.
+
+\begin{minipage}[b]{.7\textwidth}
+The leaves of the example tree become constants \Verb+"3"+, \Verb+"7"+ and
+ and \Verb+"21"+ .
+Their parent nodes become terms with a constructor \Verb+Int+ and a constant as
+a subterm.
+The node labeled with \Verb+Mul+ combines the terms for its subtrees to
+\Verb+Mul(Int("3"),Int("7"))+.
+Finally, the root node combines the terms for its subtrees to
+\Verb+Add(Mul(Int("3"),Int("7")),Int("21"))+.
+\end{minipage}
+\hfill
+\begin{Tree}
+\node {Add}
+  child { node {Mul}
+    child { node {Int}
+      child { node {"3"}}}
+    child { node {Int}
+      child { node {"7"}}}}
+  child {edge from parent[draw=none]}
+  child { node {Int}
+    child { child { node {"21"}}}};
+\end{Tree}
+
+\end{solution}
+
+\end{parts} 

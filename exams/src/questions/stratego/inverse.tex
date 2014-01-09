@@ -1,0 +1,54 @@
+\titledquestion{Term rewriting}
+\droptotalpoints
+
+\emph{Stratego} provides a strategy \verb+inverse+ with the following
+implementation:
+
+\begin{center}
+\begin{minipage}[t]{.6\textwidth} 
+\begin{Verbatim}
+inverse(|a): []     -> a
+inverse(|a): [x|xs] -> <inverse(|[x|a])> xs 
+\end{Verbatim}
+\end{minipage}
+\end{center}
+
+\begin{parts}
+
+\part[2]
+Explain the semantics of \verb+inverse+ in English. 
+
+\begin{solution}
+\Verb+inverse+ rewrites a list to a new list.
+The resulting list has the same elements as the original list, but in reversed order.
+\end{solution}
+
+\part[4]
+What is the result of applying \Verb+inverse(|[])+ to the term \Verb+[1,2,3]+?
+Show each step of computation.
+
+\begin{solution}
+\begin{minipage}[t]{.6\textwidth} 
+\begin{Verbatim}
+<inverse(|[])> [1,2,3] => <inverse(|[1])> [2,3] => 
+<inverse(|[2,1])> [3] => <inverse(|[3,2,1])> [] => [3,2,1] 
+\end{Verbatim}
+\end{minipage}
+\end{solution}
+
+\part[4]
+Based on the definition of \verb+inverse+, explain how an accumulator is used. 
+
+\begin{solution}
+An accumulator stores a temporary result of an ongoing computation.
+\Verb+inverse+ uses its term parameter to accumulate the inverted list.
+When the strategy is called, the accumulator should be initialised with the
+empty list.
+The second rule accumulates the inverted list by prepending the current head of
+the list to the so far accumulated list.
+It calls \Verb+inverse+ recursively on the tail of the list with the new
+accumulator.
+The first rule returns the accumulated list as the result of the inversion.
+\end{solution}
+
+\end{parts}
